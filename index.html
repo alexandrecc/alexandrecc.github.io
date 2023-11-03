@@ -1,1 +1,69 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Large Points Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+  input[type='number'] {
+    margin: 5px;
+  }
+  button {
+    margin: 5px;
+  }
+  #result {
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Large Points Calculator</h2>
+  <label for="x">X:</label>
+  <input type="number" id="x" placeholder="Enter value for X" required>
+  <label for="y">Y:</label>
+  <input type="number" id="y" placeholder="Enter value for Y" required>
+  <label for="z">Z:</label>
+  <input type="number" id="z" placeholder="Enter value for Z" required>
+  <button onclick="calculateLargePoints()">Calculate</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function calculateLargePoints() {
+  var x = parseInt(document.getElementById('x').value) || 0;
+  var y = parseInt(document.getElementById('y').value) || 0;
+  var z = parseInt(document.getElementById('z').value) || 0;
+  var largePoints = 0;
+
+  while (true) {
+    var points = [x, y, z];
+    points.sort(function(a, b) { return b - a; });
+
+    if (points[1] === 0) {
+      break;
+    }
+
+    largePoints++;
+    points[0]--;
+    points[1]--;
+
+    x = points[0];
+    y = points[1];
+    z = points[2];
+  }
+
+  document.getElementById('result').textContent = 'Total large points: ' + largePoints;
+}
+</script>
+</body>
+</html>
